@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GraphqlModule } from './graphql.module';
+import { GraphqlModule } from './user/graphql.module';
 
 @Module({
   imports: [GraphqlModule],

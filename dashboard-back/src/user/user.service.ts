@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { UpdateUserInput } from './updatedUser.entity';
+import { merge } from 'lodash';
 
 @Injectable()
 export class UserService {
   private user: User | null = null;
   async getUserById(id: number): Promise<User> {
-    // Return mock static data for the user
     this.user = {
       nationalId: {
         idNumber: '123123123123',
@@ -51,7 +51,12 @@ export class UserService {
     id: string,
     updatedUserData: UpdateUserInput,
   ): Promise<User> {
-    this.user = { ...this.user, ...updatedUserData };
+    if (!this.user) {
+      this.user = {} as User;
+    }
+    console.log(this.user);
+    this.user = merge(this.user, updatedUserData);
+    console.log(this.user);
     return this.user;
   }
 }
